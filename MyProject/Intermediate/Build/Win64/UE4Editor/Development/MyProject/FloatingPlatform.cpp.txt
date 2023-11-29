@@ -1,0 +1,3 @@
+C:\Unreal Engine\LearningRPG\MyProject\Intermediate\Build\Win64\UE4Editor\Development\MyProject\Definitions.MyProject.h
+C:\Unreal Engine\LearningRPG\MyProject\Source\MyProject\FloatingPlatform.h
+C:\Unreal Engine\LearningRPG\MyProject\Intermediate\Build\Win64\UE4Editor\Inc\MyProject\FloatingPlatform.generated.h

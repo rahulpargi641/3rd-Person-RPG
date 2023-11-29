@@ -1,0 +1,5 @@
+C:\Unreal Engine\LearningRPG\MyProject\Intermediate\Build\Win64\UE4Editor\Development\MyProject\Definitions.MyProject.h
+C:\Unreal Engine\LearningRPG\MyProject\Source\MyProject\Critter.h
+C:\Unreal Engine\LearningRPG\MyProject\Intermediate\Build\Win64\UE4Editor\Inc\MyProject\Critter.generated.h
+C:\Program Files\Epic Games\UE_4.27\Engine\Source\Runtime\Engine\Classes\Camera\CameraComponent.h
+C:\Program Files\Epic Games\UE_4.27\Engine\Intermediate\Build\Win64\UE4Editor\Inc\Engine\CameraComponent.generated.h

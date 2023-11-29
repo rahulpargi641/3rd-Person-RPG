@@ -1,0 +1,8 @@
+{
+	"SourceFiles": [
+		"C:\\Unreal Engine\\LearningRPG\\MyProject\\Source\\MyProject\\MyProject.Build.cs",
+		"C:\\Unreal Engine\\LearningRPG\\MyProject\\Source\\MyProject.Target.cs",
+		"C:\\Unreal Engine\\LearningRPG\\MyProject\\Source\\MyProjectEditor.Target.cs"
+	],
+	"EngineVersion": "4.27.2"
+}
