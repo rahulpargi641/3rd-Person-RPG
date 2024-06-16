@@ -24,9 +24,7 @@ void APickup::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* O
 			Main->PickupLocations.Add(GetActorLocation());  // Add Location of coins to PickupLocations Array
 
 			Destroy();  // Destroy Coin
-			 
 		}
-
 	}
 }
 

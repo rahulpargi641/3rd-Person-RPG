@@ -29,13 +29,14 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item|Sound")
 		class USoundCue* OverlapSound;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item|ItemProperties")
 		bool bRotate;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item|Sound")
 		float RotationRate;   
 
-	// Player Controller -  Posses pawn, you posses and unposses other pawn, Information on HUD still stay
+	// Player Controller - Posses pawn, you can posses and unposses other pawn, Information on HUD still stay
 
 protected:
 	// Called when the game starts or when spawned
@@ -48,6 +49,5 @@ public:
 	UFUNCTION()
 		virtual void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
 	UFUNCTION()
-	virtual void OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
-
+		virtual void OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 };

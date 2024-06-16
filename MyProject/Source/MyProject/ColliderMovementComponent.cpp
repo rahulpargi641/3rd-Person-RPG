@@ -29,6 +29,5 @@ void UColliderMovementComponent::TickComponent(float DeltaTime, enum ELevelTick 
 			SlideAlongSurface(DesiredMovementThisFrame, 1 - Hit.Time, Hit.Normal, Hit);
 			UE_LOG(LogTemp, Warning, TEXT("Valid Blocking Hit"));
 		}
-
 	}
 }

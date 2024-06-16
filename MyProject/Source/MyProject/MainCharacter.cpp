@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "MainCharacter.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
@@ -32,7 +31,7 @@ AMainCharacter::AMainCharacter()
 
 	// Create follow camera
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("CAmera"));
-	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);           // Attaching camera to the CameraBoom and functionality to attach meshes to socket
+	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName); // Attaching camera to the CameraBoom and functionality to attach meshes to socket
 	FollowCamera->bUsePawnControlRotation = false;  // Attach the camera to the end of the boom and let the boom adjust to the match the controller orientation
 	// we want camera to follow CameraBoom's rotation   
 	
@@ -51,7 +50,6 @@ AMainCharacter::AMainCharacter()
 	GetCharacterMovement()->RotationRate = FRotator(0.f, 540.f, 0.f); // ...at this rotation rate
 	GetCharacterMovement()->JumpZVelocity = 650.f;
 	GetCharacterMovement()->AirControl = 0.2f;
-
 
 	MaxHealth = 100.f;
 	Health = 60.f;
@@ -78,8 +76,6 @@ void AMainCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 	UKismetSystemLibrary::DrawDebugSphere(this, GetActorLocation() + FVector(0, 0, 75.f), 25.f, 8,FLinearColor::Green, 10.f, .5f ); // sphere above character's head, 12 is a segement value
-
-	
 }
 
 // Called every frame
@@ -87,7 +83,7 @@ void AMainCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	float DeltaStamina = StaminaDrainRate * DeltaTime;// DeltaStamina - How much the stamina should change in particular frame in order to drain or recover 
+	float DeltaStamina = StaminaDrainRate * DeltaTime; // DeltaStamina - How much the stamina should change in particular frame in order to drain or recover 
 	switch (StaminaStatus)
 	{
 	case EStaminaStatus::ESS_Normal:
@@ -147,7 +143,7 @@ void AMainCharacter::Tick(float DeltaTime)
 			SetMovementStatus(EMovementStatus::EMS_Normal);
 		    
 		}
-				break;
+		break;
 
 	case EStaminaStatus::ESS_Exhausted:
 		if (bShitKeyDown)
@@ -219,9 +215,7 @@ void AMainCharacter::MoveForward(float value)
 
 		const FVector Direction= FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);  // Gives Forward Vector
 		AddMovementInput(Direction, value);
-	
 	}
-
 }
 
 void AMainCharacter::MoveRight(float value)
@@ -234,7 +228,6 @@ void AMainCharacter::MoveRight(float value)
 
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);  // gives Right vector
 		AddMovementInput(Direction, value);
-
 	}
 }
 
@@ -244,7 +237,7 @@ void AMainCharacter::TurnRate(float rate)
 	* GetWorld() will return a pointer type
 	* UWorld is our blueprint, and we could construct it using a method called the constructor.
 	*/
-	AddControllerYawInput(rate * BaseTurnRate * GetWorld()->GetDeltaSeconds());    // Get Deltatime outside of tick function
+	AddControllerYawInput(rate * BaseTurnRate * GetWorld()->GetDeltaSeconds());  // Get Deltatime outside of tick function
 }
 
 void AMainCharacter::LookUpRate(float rate)
@@ -263,22 +256,17 @@ void AMainCharacter::LMBDown()
 		{
 			Weapon->Equip(this);
 			SetActiveOverlappingItem(nullptr);  // After equipping the item/sword setting the overlap false 
-
 		}
 	}
 	else if (EquippedWeapon)  // Item is equipped
 	{
 		Attack();
 	}
-
-
-
 }
 void AMainCharacter::LMBUp()
 {
 	bLMBDown = false;
 }
-
 
 void AMainCharacter::DecrementHealth(float Amount)
 {
@@ -295,7 +283,7 @@ void AMainCharacter::DecrementHealth(float Amount)
 
 void AMainCharacter::Die()
 {
-	
+	// yet to implement 
 }
 
 void AMainCharacter::IncrementCoins(int32 Amount)

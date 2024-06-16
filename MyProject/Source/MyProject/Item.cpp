@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "Item.h"
 #include"Components/SphereComponent.h"
 #include "Components/StaticMeshComponent.h"
@@ -8,7 +7,6 @@
 #include "Kismet/GameplayStatics.h"
 #include "Engine/World.h"
 #include "Sound/SoundCue.h"
-
 
 // Sets default values
 AItem::AItem()
@@ -23,9 +21,9 @@ AItem::AItem()
 
 	IdleParticlesComponent = CreateDefaultSubobject<UParticleSystemComponent>(TEXT("IdleParticlesComponent"));
 	IdleParticlesComponent->SetupAttachment(GetRootComponent());
+
 	bRotate = false;
 	RotationRate = 30.f;
-
 }
 
 // Called when the game starts or when spawned
@@ -33,10 +31,8 @@ void AItem::BeginPlay()
 {
 	Super::BeginPlay();
 	
-
 	CollisionVolume->OnComponentBeginOverlap.AddDynamic(this, &AItem::OnOverlapBegin);
 	CollisionVolume->OnComponentEndOverlap.AddDynamic(this, &AItem::OnOverlapEnd);
-	
 }
 
 // Called every frame
@@ -49,9 +45,7 @@ void AItem::Tick(float DeltaTime)
 		FRotator Rotation = GetActorRotation();
 		Rotation.Yaw += RotationRate * DeltaTime;	
 		SetActorRotation(Rotation);
-
 	}
-
 }
 
 void AItem::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
@@ -59,8 +53,7 @@ void AItem::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* Oth
 	UE_LOG(LogTemp, Warning, TEXT("Super::OnOverlapBegin"));
 	if (OverlapParticles) // or OverlapParticles == null  
 	{
-		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), OverlapParticles, GetActorLocation(), FRotator(0.f), true);
-			// GetWorld() gives UWorld
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), OverlapParticles, GetActorLocation(), FRotator(0.f), true); // GetWorld() gives UWorld
 	}
 
 	if (OverlapSound)
@@ -68,7 +61,6 @@ void AItem::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* Oth
 		UGameplayStatics::PlaySound2D(this, OverlapSound); // SoundCue is inherited From SoundBase class  
 	}
 	 // Destroy actor
-
 }
 
 void AItem::OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)

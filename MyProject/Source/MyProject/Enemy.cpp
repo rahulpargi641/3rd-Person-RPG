@@ -24,10 +24,9 @@ AEnemy::AEnemy()
 
 	bOverlappingCombatSphere = false;
 
-	Health = 75.f;
 	MaxHealth = 100.f;
+	Health = 75.f;
 	Damage = 10.f;
-
 }
 
 // Called when the game starts or when spawned
@@ -42,21 +41,18 @@ void AEnemy::BeginPlay()
 
 	CombatSphere->OnComponentBeginOverlap.AddDynamic(this, &AEnemy::CombatSphereOnOverlapBegin);
 	CombatSphere->OnComponentEndOverlap.AddDynamic(this, &AEnemy::CombatSphereOnOverlapEnd);
-	
 }
 
 // Called every frame
 void AEnemy::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
 void AEnemy::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-
 }
 
 
@@ -81,7 +77,6 @@ void AEnemy::AgroSphereOnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AA
 			{
 				AIController->StopMovement();
 			}
-		
 		}
 	}
 }
@@ -124,12 +119,12 @@ void AEnemy::MoveToTarget(AMainCharacter* Target)
 	if (AIController)
 	{
 		UE_LOG(LogTemp, Warning, TEXT("MoveToTarget"));
+
 		FAIMoveRequest MoveRequest;
 		MoveRequest.SetGoalActor(Target);
 		MoveRequest.SetAcceptanceRadius(10.f);
 
 		FNavPathSharedPtr NavPath;
-
 		AIController->MoveTo(MoveRequest, &NavPath);
 		//TArray<FNavPathPoint> PathPoints = NavPath->GetPathPoints();
 		auto PathPoints = NavPath->GetPathPoints();
@@ -140,6 +135,5 @@ void AEnemy::MoveToTarget(AMainCharacter* Target)
 			UKismetSystemLibrary::DrawDebugSphere(this, Location, 25.f, 8, FLinearColor::Blue,10.f, 1.f);
 
 		}*/
-
 	}
 }

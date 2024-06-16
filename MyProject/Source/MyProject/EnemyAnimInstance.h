@@ -14,11 +14,6 @@ class MYPROJECT_API UEnemyAnimInstance : public UAnimInstance
 {
 	GENERATED_BODY()
 
-
-		virtual void NativeInitializeAnimation() override;
-	UFUNCTION(BlueprintCallable, Category = AnimationProperties)
-		void UpdateAnimationProperties(); // similar to BeginPlay()
-
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = true));
 	float MovementSpeed;
 
@@ -27,5 +22,10 @@ class MYPROJECT_API UEnemyAnimInstance : public UAnimInstance
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = true));
 	class AEnemy* Enemy;
+
+	virtual void NativeInitializeAnimation() override;
+
+	UFUNCTION(BlueprintCallable, Category = AnimationProperties)
+		void UpdateAnimationProperties(); // similar to BeginPlay()
 	
 };

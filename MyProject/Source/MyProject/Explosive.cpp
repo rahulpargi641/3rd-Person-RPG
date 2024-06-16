@@ -2,7 +2,7 @@
 
 
 #include "Explosive.h"
-#include "MainCharacter.h" // so we know what main character is in the OnOverlapBegin and OnOverlapEnd , when we typecast OtherActor to MainCharacter
+#include "MainCharacter.h" // so we know what main character has the OnOverlapBegin and OnOverlapEnd , when we typecast OtherActor to MainCharacter
 
 AExplosive::AExplosive()
 {
@@ -16,12 +16,11 @@ void AExplosive::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor
 
 	if (OtherActor) //  
 	{
-		AMainCharacter* Main = Cast<AMainCharacter>(OtherActor);  // if cast fails then Main will be filled null
-		if (Main)  // checks if valid and if it's not null then go inside if statement then we can access things in inside of main
+		AMainCharacter* Main = Cast<AMainCharacter>(OtherActor);  // if cast fails then Main will be null
+		if (Main)
 		{
 			Main->DecrementHealth(Damage);
 			Destroy();  // Destroy Bomb
-
 		}
 	}
 }

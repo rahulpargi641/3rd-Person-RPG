@@ -37,25 +37,23 @@ void AFloorSwitch::BeginPlay()
 {
 	Super::BeginPlay();
 
-	TriggerBox->OnComponentBeginOverlap.AddDynamic(this, &AFloorSwitch::OnOverlapBegin); // Actors inherits FComponentBeginOverlapSinature* OncomponentBeginOverlap
-	TriggerBox->OnComponentEndOverlap.AddDynamic(this, &AFloorSwitch::OnOverlapEnd); // Actors inherits FComponentBeginOverlapSinature* OncomponentBeginOverlap
+	TriggerBox->OnComponentBeginOverlap.AddDynamic(this, &AFloorSwitch::OnOverlapBegin); // Actors inherits FComponentBeginOverlapSinature* OnComponentBeginOverlap
+	TriggerBox->OnComponentEndOverlap.AddDynamic(this, &AFloorSwitch::OnOverlapEnd); // Actors inherits FComponentBeginOverlapSignature* OnComponentEndOverlap
 																						 // from the PrimitiveComponent.h class. AddDynamics is a macro
 	InitialDoorLocation = Door->GetComponentLocation();
 	InitialDoorSwitchLocation = FloorSwitch->GetComponentLocation();
-
-	
 }
 
 // Called every frame
 void AFloorSwitch::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 void AFloorSwitch::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
 	UE_LOG(LogTemp, Warning, TEXT("Overlap Begin."));
+
 	if (!bCharacterOnSwitch) bCharacterOnSwitch = true;
 	RaiseDoor();
 	LowerFloorSwitch();
@@ -64,8 +62,8 @@ void AFloorSwitch::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AAct
 void AFloorSwitch::OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
 {
 	UE_LOG(LogTemp, Warning, TEXT("Overlap End."));
-	if (bCharacterOnSwitch) bCharacterOnSwitch = false;
 
+	if (bCharacterOnSwitch) bCharacterOnSwitch = false;
 	GetWorldTimerManager().SetTimer(SwitchHandle, this, &AFloorSwitch::CloseDoor, SwitchTime);  // Gets WorldTimerManager and it WorldTimerManager sets Timer
 }
 
@@ -90,5 +88,4 @@ void AFloorSwitch::CloseDoor()
 		LowerDoor();
 		RaiseFloorSwitch();
 	}
-	
 }

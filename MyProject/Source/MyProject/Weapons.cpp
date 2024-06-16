@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "Weapons.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "MainCharacter.h"  // on equip function uses 
@@ -28,6 +27,7 @@ AWeapons::AWeapons()
 void AWeapons::BeginPlay() 
 {
 	Super::BeginPlay();
+
 	CombatCollision->OnComponentBeginOverlap.AddDynamic(this, &AWeapons::CombatOnOverlapBegin);
 	CombatCollision->OnComponentEndOverlap.AddDynamic(this, &AWeapons::CombatOnOverlapEnd);
 }
@@ -36,7 +36,7 @@ void AWeapons::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* 
 {
 	Super::OnOverlapBegin(OverlappedComponent, OtherActor, OtherComp, OtherBodyIndex, bFromSweep, SweepResult);
 
-	if (WeaponState==EWeaponState::EWS_Pickup  && OtherActor) //otherActor - which overlaps with area
+	if (WeaponState == EWeaponState::EWS_Pickup  && OtherActor) // otherActor - which overlaps with area
 	{
 		AMainCharacter* Main = Cast<AMainCharacter>(OtherActor);  // if OtherActor can be cast to AMainCharacter then it is Maincharacter
 
@@ -44,7 +44,6 @@ void AWeapons::OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* 
 		{
 			// Equip(Main);  // Equip to Main, set sword upon touching it
 			Main->SetActiveOverlappingItem(this); // if we are overlapping with item
-			 
 		}
 	}
  }
@@ -57,9 +56,7 @@ void AWeapons::OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* Ot
 	if (Main)
 	{
 		Main->SetActiveOverlappingItem(nullptr); // as soon as we stop overlapping 
-
 	}
-
  }
 
 void AWeapons::Equip(AMainCharacter* Character)
@@ -75,20 +72,20 @@ void AWeapons::Equip(AMainCharacter* Character)
 		if (RightHandSocket)
 		{
 			RightHandSocket->AttachActor(this, Character->GetMesh());
-			bRotate = false;  // as soon as sword attaches to the characte turn off rotation 
+			bRotate = false;  // as soon as sword attaches to the character turn off rotation 
 
 			// Character->GetEquippedWeapon()->Destroy();  // Get refrence to EquippedWeapon and Destroy (Previously equipped weapon. When we take the new weapon)
 			/* You might get crash if you try to destroy weapon before equipping it  so go to mainchar to implement*/ 
 			
 			Character->SetEquipedWeapon(this);
-
 			Character->SetActiveOverlappingItem(nullptr);  // In the Game overlapping status changes to null means points to nothing, as soon as we equip we set ActiveOverlapping item to null
-
 		}
+
 		if (OnEquipSound) // Checking if sound selected in blueprint is valid
 		{
 			UGameplayStatics::PlaySound2D(this, OnEquipSound);
 		}
+
 		if (!bWeaponParticle) // idle particle on weapon if we want or not option 
 		{
 			IdleParticlesComponent->Deactivate(); // deactivate if we don't want idle particle on sword 
@@ -106,12 +103,12 @@ void AWeapons::CombatOnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AA
 		{
 			if (Enemy->HitParticles)
 			{
-				UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), Enemy->HitParticles,GetActorLocation(), FRotator(0.f), false);
+				UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), Enemy->HitParticles, GetActorLocation(), FRotator(0.f), false);
 			}
 		}
 	}
-
 }
+
 void AWeapons::CombatOnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex) 
 {
 

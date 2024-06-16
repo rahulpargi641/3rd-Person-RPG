@@ -14,17 +14,21 @@ class MYPROJECT_API UMainAnimInstance : public UAnimInstance
 {
 	GENERATED_BODY()
 
-		virtual void NativeInitializeAnimation() override;
-	UFUNCTION(BlueprintCallable, Category = AnimationProperties)
-	void UpdateAnimationProperties(); // similar to BeginPlay()
-
-		UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = true));
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = true));
 	float MovementSpeed;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = true));
 	bool bIsInAir;
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = true));
-	class APawn* Pawn; // refrence to character Owner pawn  
+	class APawn* Pawn; // reference to Owner pawn (Main Character)  
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Movement, meta = (AllowPrivateAccess = true));
 	class AMainCharacter* Main;
+
+private:
+	UFUNCTION(BlueprintCallable, Category = AnimationProperties)
+		void UpdateAnimationProperties(); // similar to BeginPlay()
+
+	virtual void NativeInitializeAnimation() override;
 };

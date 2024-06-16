@@ -17,27 +17,27 @@ public:
 
 	// Mesh for platform
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Platform")
-	class UStaticMeshComponent* Mesh;
+		class UStaticMeshComponent* Mesh;
 
 	UPROPERTY(EditAnywhere)
 		FVector StartPoint;
+
 	UPROPERTY(EditAnywhere, meta = (MakeEditWidget = "true")) 
 		FVector EndPoint; 
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Platform")
-	float InterpSpeed;
+		float InterpSpeed;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Platform")
 		float InterpTime;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Platform")
+		bool bInterping; 	
+
 	float Distance;
 
+	FTimerHandle InterpTimer; // Interpolation - Moving between two points smoothly
 
-	FTimerHandle InterpTimer;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Platform")
-	bool bInterping;
-
-	// Interpolation - Moving between two points smoothly
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;

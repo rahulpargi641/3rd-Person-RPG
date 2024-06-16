@@ -9,20 +9,19 @@
 
 void UMainAnimInstance::NativeInitializeAnimation()
 {
-	if (Pawn==nullptr)
+	if (Pawn == nullptr)
 	{
 		Pawn = TryGetPawnOwner(); 
 		if (Pawn)
 		{
 			Main = Cast<AMainCharacter>(Pawn);
 		}
-		
 	}
 }
 
 void UMainAnimInstance::UpdateAnimationProperties() 
 {
-	if (Pawn==nullptr) // Upper code will already set the pawn but just be sure
+	if (Pawn == nullptr) // Upper code will already set the pawn but just be sure
 	{
 		Pawn = TryGetPawnOwner();  // Get pawn owner of animationInstance
 	}
@@ -30,7 +29,7 @@ void UMainAnimInstance::UpdateAnimationProperties()
 	if (Pawn)
 	{
 		FVector Speed = Pawn->GetVelocity(); // we want velocity only in horizontal direction 
-		FVector LateralSpeed = FVector(Speed.X, Speed.Y, 0.0f); // don't want to change animationn other than horizontal direcrtion
+		FVector LateralSpeed = FVector(Speed.X, Speed.Y, 0.0f); // don't want to change animation other than horizontal and vertical direction
 		MovementSpeed = LateralSpeed.Size();  // scaler value of vector
 
 		bIsInAir = Pawn->GetMovementComponent()->IsFalling();  
@@ -39,6 +38,5 @@ void UMainAnimInstance::UpdateAnimationProperties()
 		{
 			Main = Cast<AMainCharacter>(Pawn); // Now we should be able to have access to main straigth from blueprint without having to GetPawnOwner node
 		}
-
 	}
 }

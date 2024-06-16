@@ -24,9 +24,7 @@ void UEnemyAnimInstance::UpdateAnimationProperties()
 		Pawn = TryGetPawnOwner(); // get pawn that owns this class 
 		if (Pawn)
 		{
-			
 			Enemy = Cast<AEnemy>(Pawn);
-
 		}
 	}
 

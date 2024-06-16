@@ -26,7 +26,7 @@ public:
 	UPROPERTY(VisibleInstanceOnly,BlueprintReadWrite, Category = "Floater Variables")
 	    FVector PlacedLocation;
 
-		UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Floater Variables")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Floater Variables")
 		bool bInitializeFloaterLocations;
 
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Floater Variables")
@@ -41,10 +41,6 @@ public:
 	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "Floater Variables")
 		FVector InitialForce;
 
-private:
-	float RunningTime;
-	float BaseZLocation;
-
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Floater Variables");
 	float A;  // Amplitue - How much we oscillate up and down
@@ -55,7 +51,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Floater Variables");
 	float D; // Vertical shift - Start Oscillation at +500 units higher or -500 lower, shifts entire wave
 
-
+private:
+	float RunningTime;
+	float BaseZLocation;
 
 protected:
 	// Called when the game starts or when spawned
@@ -64,5 +62,4 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
 };

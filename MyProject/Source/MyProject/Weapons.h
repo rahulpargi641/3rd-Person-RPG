@@ -25,34 +25,33 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item")
 		EWeaponState WeaponState;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item | Particles")
-		bool bWeaponParticle; // if we want weapon particles after equiping
-
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Skeletal Mesh")
 		class USkeletalMeshComponent* SkeletalMesh;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Item | Combat")
 		class UBoxComponent* CombatCollision;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item | Combat")
-	float damage;
+		float damage;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item | Sound")
 		class USoundCue* OnEquipSound;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item | Particles")
+		bool bWeaponParticle; // if we want weapon particles after equiping
+
 	protected:
 		virtual void BeginPlay() override;
 
-
 	public:
-	// UFUNCTION()  - Inherited Function cannot be marked UFUNCTION, it will inherit From the parent class 
+	// UFUNCTION() - Inherited Function cannot be marked UFUNCTION, it will inherit From the parent class 
 	virtual void OnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult) override;
 	virtual void OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex) override;
 
-	void Equip(class AMainCharacter* Character);
+	void CombatOnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+	void CombatOnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 	FORCEINLINE void SetWeaponState(EWeaponState State) { WeaponState = State; }
 	FORCEINLINE EWeaponState GetWeaponState() { return WeaponState; }
-
-	void CombatOnOverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-	void CombatOnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+	void Equip(class AMainCharacter* Character);
 };

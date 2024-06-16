@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "FloatingPlatform.h"
 #include "Components/StaticMeshComponent.h"
 #include "TimerManager.h"
@@ -23,13 +22,13 @@ AFloatingPlatform::AFloatingPlatform()
 void AFloatingPlatform::BeginPlay()
 {
 	Super::BeginPlay();
+
 	StartPoint = GetActorLocation();
 	EndPoint += StartPoint;
 	bInterping = false;
 	GetWorldTimerManager().SetTimer(InterpTimer, this, &AFloatingPlatform::ToggleInterping, InterpTime);
 
 	Distance = (EndPoint - StartPoint).Size(); // Size gives the Magnitude of the vector
-	
 }
 
 // Called every frame
@@ -52,7 +51,6 @@ void AFloatingPlatform::Tick(float DeltaTime)
 			SwapVectors(StartPoint, EndPoint);
 		}
 	}
-
 }
 
 void AFloatingPlatform::ToggleInterping()

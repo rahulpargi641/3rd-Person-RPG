@@ -12,6 +12,17 @@ class MYPROJECT_API ACritter : public APawn
 	GENERATED_BODY()
 
 public:
+	UPROPERTY(EditAnywhere, Category = "Mesh")
+		//class UStaticMeshComponent* MeshComponent;
+		class USkeletalMeshComponent* MeshComponent;
+
+	UPROPERTY(EditAnywhere)
+		class UCameraComponent* Camera;
+
+	UPROPERTY(EditAnywhere, Category = "Pawn Movement")
+		float MaxSpeed;
+
+public:
 	// Sets default values for this pawn's properties
 	ACritter();
 
@@ -26,22 +37,9 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	UPROPERTY(EditAnywhere, Category = "Mesh")
-		//class UStaticMeshComponent* MeshComponent;
-		class USkeletalMeshComponent* MeshComponent;
-
-	UPROPERTY(EditAnywhere)
-    class UCameraComponent* Camera;
- 
-	UPROPERTY(EditAnywhere, Category="Pawn Movement")
-	float MaxSpeed;
-
-
-
 private:
 	void MoveForward(float value);
 	void MoveRight(float value);
 
 	FVector CurrentVelocity;
-
 };

@@ -28,7 +28,6 @@ AMyActor::AMyActor()     // Constructor
 	B = 0.f;
 	C = 0.f;
 	D = 0.f;
-
 }
 
 // Called when the game starts or when spawned
@@ -53,15 +52,14 @@ void AMyActor::BeginPlay()
 	if (bInitializeFloaterLocations) 
 	{
 		SetActorLocation(InitialLocation);
-
 	}
+
 	//AddActorLocalRotation(Rotation);
 	//AddActorWorldOffset(LocalOffset, true, &HitResult); // Vectors are Additive 
 	//AddActorLocalOffset(LocalOffset, true, &HitResult); // Constructor
 
 	//StaticMesh->AddForce(InitialForce);
 	//StaticMesh->AddTorqueInRadians(InitialForce);  
-
 }
 
 // Called every frame

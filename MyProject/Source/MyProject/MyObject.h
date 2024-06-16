@@ -12,19 +12,16 @@
 UCLASS(Blueprintable) 
 class MYPROJECT_API UMyObject : public UObject
 {
-
 	GENERATED_BODY()
 
 public:
-		UMyObject();
 
 	UPROPERTY(BlueprintReadWrite, category = "Vvariables")
 	float var;
-	
+
+public:
+	UMyObject();
+
 	UFUNCTION(BlueprintCallable, category = "Vfunctions")
-	void VFunction();
-
-    
-
-	
+		void VFunction();
 };

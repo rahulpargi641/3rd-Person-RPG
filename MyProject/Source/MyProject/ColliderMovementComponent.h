@@ -10,16 +10,10 @@
  * 
  */
 UCLASS()
-class MYPROJECT_API UColliderMovementComponent : public UPawnMovementComponent /* -> NavMovementComponent -> UMovementComponent -> UActorComponent inside
-																			   TickComponent function
-
-																			   */
-																			   
+class MYPROJECT_API UColliderMovementComponent : public UPawnMovementComponent // -> NavMovementComponent -> UMovementComponent -> UActorComponent inside TickComponent function															  																		   
 {
 	GENERATED_BODY()
+
 public:
-	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override; // copied from UPawnMovementComponent  inherites from UNavMovementComponent -> UMovementComponent 
-
-
-	
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override; // copied from UPawnMovementComponent
 };

@@ -32,19 +32,16 @@ public:
 	/** Initial Locaton for Door*/
 	UPROPERTY(BlueprintReadWrite, Category = "Floor Switch")
 		FVector InitialDoorLocation;
+
 	/*Initial Location For DoorSwitch*/
 	UPROPERTY(BlueprintReadWrite, Category = "Floor Switch")
 		FVector InitialDoorSwitchLocation;
 
-	FTimerHandle SwitchHandle;
-
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Floor Switch")
 		float SwitchTime;
 
+	FTimerHandle SwitchHandle;
 	bool bCharacterOnSwitch;
-
-	void CloseDoor();
-
 
 protected:
 	// Called when the game starts or when spawned
@@ -60,8 +57,8 @@ public:
 	UFUNCTION()
 	    void OnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
-	UFUNCTION(BlueprintImplementableEvent, Category="Floor Switch") // don't have to give functionlity in c++, in blueprint
-	void RaiseDoor(); // In Blueprint red nodes are for events 
+	UFUNCTION(BlueprintImplementableEvent, Category ="Floor Switch") // don't have to give functionlity in c++, in blueprint
+		void RaiseDoor(); // In Blueprint red nodes are for events 
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Floor Switch")
 		void LowerDoor();
@@ -70,12 +67,15 @@ public:
 		void RaiseFloorSwitch(); // In Blueprint red nodes are for events
 
 	UFUNCTION(BlueprintImplementableEvent, Category = "Floor Switch")
-		void LowerFloorSwitch();              // GetDeltaSeconds in Blueprint- How much time has passed since previous frame
+		void LowerFloorSwitch();   // GetDeltaSeconds in Blueprint- How much time has passed since previous frame
 
-	UFUNCTION(BlueprintCallable, Category = "Floor Switich")
+	UFUNCTION(BlueprintCallable, Category = "Floor Switch")
 		void UpdateDoorLocation(float Z);
+
 	UFUNCTION(BlueprintCallable, Category = "Floor Switch")
 		void UpdateFloorSwitchLocation(float Z);
+
+	void CloseDoor();
 };
 
 

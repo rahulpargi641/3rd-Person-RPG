@@ -7,6 +7,7 @@
 void AMainPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
+
 	if (HUDOverlayAsset) // if in blueprint we selected HUDOvelayAsset
 	{
 		HUDOverlay = CreateWidget<UUserWidget>(this, HUDOverlayAsset);   

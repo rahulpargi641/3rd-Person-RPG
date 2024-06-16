@@ -1,6 +1,5 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "Collider.h"
 #include "Components\StaticMeshComponent.h"
 #include "Components\SphereComponent.h"
@@ -11,15 +10,12 @@
 #include "ColliderMovementComponent.h"
 
 
-
-// Sets default values
 ACollider::ACollider()
 {
 	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
 	//RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("root component"));
-
 	SphereComponent = CreateDefaultSubobject<USphereComponent>(TEXT("SPhere component"));
 	SetRootComponent(SphereComponent);
 	SphereComponent->InitSphereRadius(40.f);
@@ -36,7 +32,6 @@ ACollider::ACollider()
 		MeshComponent->SetRelativeLocation(FVector(0.f, 0.f, -40.f));
 		MeshComponent->SetWorldScale3D(FVector(0.8f, 0.8f, 0.8f)); 
 	}
-
 
 	SpringArm = CreateDefaultSubobject<USpringArmComponent>(TEXT("SPringArm"));
 	SpringArm->SetupAttachment(GetRootComponent());
@@ -56,12 +51,10 @@ ACollider::ACollider()
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
 }                
 
-
 // Called when the game starts or when spawned
 void ACollider::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
@@ -71,12 +64,11 @@ void ACollider::Tick(float DeltaTime)
 
 	FRotator NewRotation = GetActorRotation();  // To look up-down and side to side  
 	NewRotation.Yaw += CameraInput.X;
-	SetActorRotation(NewRotation);      // Remember Actually this Rotates pawn
+	SetActorRotation(NewRotation);      // Actually this Rotates pawn
 	
 	FRotator NewSpringArmRotation = SpringArm->GetComponentRotation();
 	NewSpringArmRotation.Pitch = FMath::Clamp(NewSpringArmRotation.Pitch += CameraInput.Y, -80.f, -15.f);  // Restrict y player movement
 	SpringArm->SetWorldRotation(NewSpringArmRotation);
-
 }
 
 // Called to bind functionality to input
@@ -88,10 +80,9 @@ void ACollider::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 	PlayerInputComponent->BindAxis(TEXT("CameraPitch"), this, &ACollider::CameraPitch);
 	PlayerInputComponent->BindAxis(TEXT("CameraYaw"), this, &ACollider::CameraYaw);
-
 }
 
-void ACollider::MoveForward(float input)  // functions in unreal editor input settings
+void ACollider::MoveForward(float input)  // In unreal editor input settings
 {
 	FVector Forward = GetActorForwardVector();
 	if (OurMovementComponent)    // Instead of checking movement component we are checking OurMovement component
@@ -100,8 +91,7 @@ void ACollider::MoveForward(float input)  // functions in unreal editor input se
 	}
 }
 
-
-void ACollider::MoveRight(float input)  // functions in unreal editor input settings
+void ACollider::MoveRight(float input)  // In unreal editor input settings
 {
 	FVector Right = GetActorRightVector();
 	if (OurMovementComponent)
@@ -122,8 +112,8 @@ void ACollider::CameraYaw(float axisValue)
 
 UPawnMovementComponent* ACollider::GetMovementComponent() const
 {
-	return OurMovementComponent;   // Our custom MovementCOmponent derives from UPawnMovementComponent* so we can indeed return OurMovementComponent in form UPawnMovement Component, 
-	                                //parent of our custom Movement Component
+	return OurMovementComponent;   // Our custom MovementCOmponent derives from UPawnMovementComponent* so we can indeed return OurMovementComponent in form UPawnMovementComponent, 
+	                               // parent of our custom Movement Component
 }
 
 
